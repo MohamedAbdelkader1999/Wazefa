@@ -14,7 +14,7 @@ namespace Wazefa.Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(x => x.FullName).IsRequired().HasMaxLength(50);
-            builder.HasOne(x=>x.Roles).WithOne<User>(x=>x.)
+            builder.HasOne(x=>x.).WithOne<User>(x=>x.)
         }
     }
 }
