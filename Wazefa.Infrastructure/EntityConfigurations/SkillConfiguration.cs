@@ -9,11 +9,11 @@ using Wazefa.Domain.Entities;
 
 namespace Wazefa.Infrastructure.EntityConfigurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class SkillConfiguration : IEntityTypeConfiguration<Skill>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Skill> builder)
         {
-            builder.Property(x => x.FullName).IsRequired().HasMaxLength(50);
+            
         }
     }
 }
