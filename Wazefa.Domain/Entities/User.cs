@@ -12,7 +12,7 @@ namespace Wazefa.Domain.Entities
     public class User : IdentityUser
     {
         public string FullName { get; set; }
-         
+        
         public virtual RefreshToken RefreshToken { get; set; }
     }
 }
