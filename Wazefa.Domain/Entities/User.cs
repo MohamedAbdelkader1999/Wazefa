@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace Wazefa.Domain.Entities
 {
-    [Table("Users")]
-    public class User : User<int>
+    [Table(nameof(User))]
+    public class User : IdentityUser
     {
         public string FullName { get; set; }
-    }
-    public class User<T> : IdentityUser<T> where T : IEquatable<T>
-    {
-        public string FullName { get; set; }
+         
+        public virtual RefreshToken RefreshToken { get; set; }
     }
 }
