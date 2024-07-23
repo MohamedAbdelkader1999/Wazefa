@@ -17,17 +17,18 @@ namespace Wazefa.Infrastructure
         {
             
         }
-        public DbSet<User> Users {  get; set; }
-        public DbSet<Skill> Skills { get; set; }
+        public new DbSet<User> Users {  get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new UserConfiguration().Configure(modelBuilder.Entity<User>());
-            new SkillConfiguration().Configure(modelBuilder.Entity<Skill>());
+            new RefreshTokenConfiguration().Configure(modelBuilder.Entity<RefreshToken>());
 
         }
     }

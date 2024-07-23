@@ -9,11 +9,11 @@ using Wazefa.Domain.Entities;
 
 namespace Wazefa.Infrastructure.EntityConfigurations
 {
-    public class SkillConfiguration : IEntityTypeConfiguration<Skill>
+    public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
     {
-        public void Configure(EntityTypeBuilder<Skill> builder)
+        public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
-            
+
         }
     }
 }

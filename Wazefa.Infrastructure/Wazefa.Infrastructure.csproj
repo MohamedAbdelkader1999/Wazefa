@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Wazefa.Domain\Wazefa.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
