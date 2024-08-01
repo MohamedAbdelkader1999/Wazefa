@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wazefa.Domain.Entities;
+using Wazefa.Core.Entities;
 
-namespace Wazefa.Infrastructure.EntityConfigurations
+namespace Wazefa.Infrastructure.Data.EntityConfigurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

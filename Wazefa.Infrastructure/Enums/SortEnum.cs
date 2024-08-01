@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.Domain.Base
+namespace Wazefa.Infrastructure.Enums
 {
-    public class EntityBase
+    public enum SortEnum
     {
+        Ascending=1,
+        AscendingDescending,
     }
 }

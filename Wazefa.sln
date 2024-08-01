@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wazefa", "Wazefa\Wazefa.csproj", "{24FD3696-8C95-4594-8453-8BA48AEE14A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa", "Wazefa\Wazefa.csproj", "{24FD3696-8C95-4594-8453-8BA48AEE14A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{90BF5C1C-1815-4E50-9722-024D4FC6CCAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9DF31C2B-88DC-48A5-8C58-779F83C5F995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wazefa.Domain", "Wazefa.Domain\Wazefa.Domain.csproj", "{30D3FDEC-74F8-42E0-9325-4CB97E530718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa.Core", "Wazefa.Domain\Wazefa.Core.csproj", "{30D3FDEC-74F8-42E0-9325-4CB97E530718}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9E21BC5C-32F9-48B4-AC84-FA54F09B0666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wazefa.Infrastructure", "Wazefa.Infrastructure\Wazefa.Infrastructure.csproj", "{036898A1-D97F-4D2D-834C-F2A76058CA4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa.Infrastructure", "Wazefa.Infrastructure\Wazefa.Infrastructure.csproj", "{036898A1-D97F-4D2D-834C-F2A76058CA4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

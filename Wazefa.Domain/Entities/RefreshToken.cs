@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.Domain.Entities
+namespace Wazefa.Core.Entities
 {
     [Table(nameof(RefreshToken))]
     public class RefreshToken

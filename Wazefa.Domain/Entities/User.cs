@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.Domain.Entities
+namespace Wazefa.Core.Entities
 {
     [Table(nameof(User))]
     public class User : IdentityUser
     {
         public string FullName { get; set; }
-        
+
         public virtual RefreshToken RefreshToken { get; set; }
     }
 }

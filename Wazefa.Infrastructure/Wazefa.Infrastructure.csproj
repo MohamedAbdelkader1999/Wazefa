@@ -18,12 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wazefa.Domain\Wazefa.Domain.csproj" />
+    <ProjectReference Include="..\Wazefa.Domain\Wazefa.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
