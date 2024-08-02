@@ -11,7 +11,7 @@ namespace Wazefa.Core.Interfaces
     {
         int Save();
         Task<int> SaveAsync();
-        IRepository<User> userRepository { get; }
-        IRepository<RefreshToken> refreshTokenRepository { get; }
+        IRepository<User,string> userRepository { get; }
+        IRepository<RefreshToken,string> refreshTokenRepository { get; }
     }
 }

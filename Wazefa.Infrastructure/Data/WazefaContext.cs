@@ -11,13 +11,13 @@ using Wazefa.Infrastructure.Data.EntityConfigurations;
 
 namespace Wazefa.Infrastructure.Data
 {
-    public class WazefaContext : IdentityDbContext<User, IdentityRole<string>, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
+    public class WazefaContext : IdentityDbContext<User>
     {
-        public WazefaContext(DbContextOptions options) : base(options)
+        public WazefaContext(DbContextOptions<WazefaContext> options) : base(options)
         {
 
         }
-        public new DbSet<User> Users { get; set; }
+        //public new DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,6 +29,7 @@ namespace Wazefa.Infrastructure.Data
         {
             new UserConfiguration().Configure(modelBuilder.Entity<User>());
             new RefreshTokenConfiguration().Configure(modelBuilder.Entity<RefreshToken>());
+            base.OnModelCreating(modelBuilder);
 
         }
     }

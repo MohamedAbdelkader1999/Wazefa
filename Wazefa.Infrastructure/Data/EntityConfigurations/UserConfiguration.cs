@@ -13,7 +13,9 @@ namespace Wazefa.Infrastructure.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(x => x.FullName).IsRequired().HasMaxLength(50);
+            //builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Email).IsRequired();
+            builder.Property(x => x.PasswordHash).IsRequired();
         }
     }
 }

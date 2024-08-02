@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace Wazefa.Core.Entities
 {
-    [Table(nameof(User))]
+    //[Table(nameof(User))]
     public class User : IdentityUser
     {
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string SecondaryPhoneNumber { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime ModificationDate { get; set; }
 
         public virtual RefreshToken RefreshToken { get; set; }
     }

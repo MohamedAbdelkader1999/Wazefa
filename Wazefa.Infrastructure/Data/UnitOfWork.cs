@@ -11,16 +11,16 @@ namespace Wazefa.Infrastructure.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly WazefaContext _wazefaContext;
-        readonly IRepository<User> _userRepository;
-        readonly IRepository<RefreshToken> _refreshTokenRepository;
+        readonly IRepository<User, string> _userRepository;
+        readonly IRepository<RefreshToken, string> _refreshTokenRepository;
         public UnitOfWork(WazefaContext wazefaContext)
         {
             _wazefaContext = wazefaContext;
-            _userRepository = new Repository<User>(wazefaContext);
-            _refreshTokenRepository = new Repository<RefreshToken>(wazefaContext);
+            _userRepository = new Repository<User, string>(wazefaContext);
+            _refreshTokenRepository = new Repository<RefreshToken, string>(wazefaContext);
         }
-        IRepository<User> IUnitOfWork.userRepository => _userRepository;
-        IRepository<RefreshToken> IUnitOfWork.refreshTokenRepository => _refreshTokenRepository;
+        IRepository<User, string> IUnitOfWork.userRepository => _userRepository;
+        IRepository<RefreshToken, string> IUnitOfWork.refreshTokenRepository => _refreshTokenRepository;
 
         public int Save()
         {

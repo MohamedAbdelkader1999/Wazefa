@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.Infrastructure.Enums
+namespace Wazefa.DTOs.Enums
 {
     public enum SortEnum
     {
-        Asc=1,
+        Asc = 1,
         Desc,
     }
 }

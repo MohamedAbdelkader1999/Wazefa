@@ -11,7 +11,7 @@ using Wazefa.Core.Interfaces;
 
 namespace Wazefa.Infrastructure.Data
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T, Key> : IRepository<T,Key> where T : class
     {
         private readonly WazefaContext _dbContext;
         private readonly DbSet<T> set;
@@ -58,9 +58,9 @@ namespace Wazefa.Infrastructure.Data
         public void Delete(List<T> entities) =>
             set.RemoveRange(entities);
 
-        public T? GetById(int id) => set.Find(id);
+        public T? GetById(Key id) => set.Find(id);
 
-        public async Task<T?> GetByIdAsync(int id) 
+        public async Task<T?> GetByIdAsync(Key id) 
             => await set.FindAsync(id);
         public IQueryable<T> GetList(Func<T, bool> where)
         {

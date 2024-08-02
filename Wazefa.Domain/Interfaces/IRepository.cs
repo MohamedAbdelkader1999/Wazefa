@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Wazefa.Core.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T, Key> where T : class
     {
         T Add(T entity);
         void Add(List<T> entities);
         Task<T> AddAsync(T entity);
         Task AddAsync(List<T> entities);
-        T? GetById(int id);
-        Task<T?> GetByIdAsync(int id);
+        T? GetById(Key id);
+        Task<T?> GetByIdAsync(Key id);
         IQueryable<T> GetList(Func<T, bool> where);
         T Update(T entity);
         void Update(List<T> entities);
