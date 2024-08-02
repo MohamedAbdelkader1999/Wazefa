@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Interfaces;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Wazefa.Infrastructure.Data
 {
@@ -22,7 +21,7 @@ namespace Wazefa.Infrastructure.Data
             _dbContext = dbContext;
             set = _dbContext.Set<T>();
         }
-        public IQueryable<T> GetPaged(Func<T,bool> where , int pageSize = 10 ,  int pageIndex = 0,int skip = 0,SortOrder sortBy = SortOrder.Ascending,params string[] includes)
+        public IQueryable<T> GetPaged(Func<T,bool> where , int pageSize = 10 ,  int pageIndex = 0,int skip = 0,string orderBy ="Id",bool IsAscending = true ,params string[] includes)
         {
             Expression<Func<T, bool>> expression = (a) => where(a);
             var query = set.AsQueryable();
@@ -35,7 +34,10 @@ namespace Wazefa.Infrastructure.Data
             if (rows < pageSize)
                 pageIndex = 1;
             int rowscount = (pageIndex - 1) * pageSize;
-            return query.Where(expression).Skip(skip).Take(pageSize);
+            return IsAscending ?
+                query.OrderBy(x => nameof(orderBy)).Where(expression).Skip(skip).Take(pageSize)
+                : query.OrderByDescending(x => nameof(orderBy)).Where(expression).Skip(skip).Take(pageSize);
+
         }
         public T Add(T entity)
         {

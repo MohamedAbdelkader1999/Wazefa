@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wazefa.Domain\Wazefa.Core.csproj" />
+    <ProjectReference Include="..\Wazefa.DTOs\Wazefa.DTOs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

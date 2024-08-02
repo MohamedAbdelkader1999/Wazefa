@@ -8,7 +8,7 @@ namespace Wazefa.Infrastructure.Enums
 {
     public enum SortEnum
     {
-        Ascending=1,
-        AscendingDescending,
+        Asc=1,
+        Desc,
     }
 }

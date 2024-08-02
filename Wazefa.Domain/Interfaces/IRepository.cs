@@ -24,5 +24,6 @@ namespace Wazefa.Core.Interfaces
         bool Any(Func<T, bool> where);
         Task<T?> SingleOrDefaultAsync(Func<T, bool> where);
         T? SingleOrDefault(Func<T, bool> where);
+        IQueryable<T> GetPaged(Func<T, bool> where, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes);
     }
 }

@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa.Infrastructure", "Wazefa.Infrastructure\Wazefa.Infrastructure.csproj", "{036898A1-D97F-4D2D-834C-F2A76058CA4D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTOs", "DTOs", "{78833A5F-AD77-451A-A823-73A716B2C14C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wazefa.DTOs", "Wazefa.DTOs\Wazefa.DTOs.csproj", "{C32D0BD6-0759-4405-9C73-54DB5C1570C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{036898A1-D97F-4D2D-834C-F2A76058CA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{036898A1-D97F-4D2D-834C-F2A76058CA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{036898A1-D97F-4D2D-834C-F2A76058CA4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32D0BD6-0759-4405-9C73-54DB5C1570C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32D0BD6-0759-4405-9C73-54DB5C1570C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32D0BD6-0759-4405-9C73-54DB5C1570C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32D0BD6-0759-4405-9C73-54DB5C1570C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{24FD3696-8C95-4594-8453-8BA48AEE14A0} = {90BF5C1C-1815-4E50-9722-024D4FC6CCAD}
 		{30D3FDEC-74F8-42E0-9325-4CB97E530718} = {9DF31C2B-88DC-48A5-8C58-779F83C5F995}
 		{036898A1-D97F-4D2D-834C-F2A76058CA4D} = {9E21BC5C-32F9-48B4-AC84-FA54F09B0666}
+		{C32D0BD6-0759-4405-9C73-54DB5C1570C1} = {78833A5F-AD77-451A-A823-73A716B2C14C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C590D2C-6B19-4B36-B045-2066B3920D5D}
