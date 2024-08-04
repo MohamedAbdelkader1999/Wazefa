@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,21 +22,39 @@ namespace Wazefa.Services.UserService
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ResponseResultDto<UserResponse>> AddAsync(AddUserRequest dto)
+        public async Task<UserResponse> AddAsync(AddUserRequest dto)
         {
-            ResponseResultDto<UserResponse> response = new ResponseResultDto<UserResponse>();
             User? addedUser = await _unitOfWork.userRepository.AddAsync(_mapper.Map<User>(dto));
             await _unitOfWork.SaveAsync();
-            return response.MappingResponse(_mapper.Map<UserResponse>(addedUser));
+            return _mapper.Map<UserResponse>(addedUser);
         }
-        public async Task<ResponseResultDto<UserResponse>> GetByIdAsync(string id)
+        public async Task<UserResponse?> GetByIdAsync(string id)
         {
-            ResponseResultDto<UserResponse> response = new ResponseResultDto<UserResponse>();
             User? user = await _unitOfWork.userRepository.GetByIdAsync(id);
             if (user == null)
-                return response.MappingResponse((int)HttpStatusCode.NotFound);
+                return null;
 
-            return response.MappingResponse(_mapper.Map<UserResponse>(user));
+            return _mapper.Map<UserResponse>(user);
+        }
+        public async Task<UserResponse?> UpdateAsync(UpdateUserRequest dto)
+        {
+
+            User? user = await _unitOfWork.userRepository.GetByIdAsync(dto.Id);
+            if (user == null)
+                return null;
+            user = _mapper.Map<User>(dto);
+            User updatedUser = _unitOfWork.userRepository.Update(user);
+            await _unitOfWork.SaveAsync();
+            return _mapper.Map<UserResponse>(user);
+        }
+        public async Task<bool> DeleteAsync(string id)
+        {
+            User? user = await _unitOfWork.userRepository.GetByIdAsync(id);
+            if (user == null)
+                return null;
+            _unitOfWork.userRepository.Delete(user);
+            bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true :false;
+            return isDeleted;
         }
     }
 }

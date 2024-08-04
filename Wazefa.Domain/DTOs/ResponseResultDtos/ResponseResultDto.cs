@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,23 +15,31 @@ namespace Wazefa.Core.DTOs.ResponseResultDtos
 
         public ResponseResultDto<T> MappingResponse()
         {
-            return new ResponseResultDto<T>() { statusCode = 404 };
+            this.statusCode = (int)HttpStatusCode.NotFound;
+            return this;
         }
         public ResponseResultDto<T> MappingResponse(int statusCode)
         {
-            return new ResponseResultDto<T>() { statusCode = statusCode };
+            this.statusCode = statusCode;
+            return this;
         }
         public ResponseResultDto<T> MappingResponse(T data)
         {
-            return new ResponseResultDto<T>() { statusCode = 200,Data = data };
+            this.statusCode = (int)HttpStatusCode.OK;
+            this.Data = data;
+            return this;
         }
         public ResponseResultDto<T> MappingResponse(int statusCode,string message)
         {
-            return new ResponseResultDto<T>() { statusCode = statusCode ,Message = message};
+            this.statusCode = statusCode;
+            this.Message = message;
+            return this;
         }
         public ResponseResultDto<T> MappingResponse(string message)
         {
-            return new ResponseResultDto<T>() { statusCode = 400 ,Message = message};
+            this.statusCode = (int)HttpStatusCode.BadRequest;
+            this.Message = message;
+            return this;
         }
     }
 }

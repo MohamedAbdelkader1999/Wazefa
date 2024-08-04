@@ -6,7 +6,9 @@ namespace Wazefa.Services.UserService
 {
     public interface IUserService
     {
-        Task<ResponseResultDto<UserResponse>> AddAsync(AddUserRequest dto);
-        Task<ResponseResultDto<UserResponse>> GetByIdAsync(string id);
+        Task<UserResponse?> AddAsync(AddUserRequest dto);
+        Task<bool> DeleteAsync(string id);
+        Task<UserResponse?> GetByIdAsync(string id);
+        Task<UserResponse?> UpdateAsync(UpdateUserRequest dto);
     }
 }
