@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Entities;
 
-namespace Wazefa.Infrastructure.Data.EntityConfigurations
+namespace Wazefa.Data.EntityConfigurations
 {
     public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
     {

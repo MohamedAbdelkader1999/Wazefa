@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Validations.UserValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Wazefa.DTOs.UserDtos;
-using Wazefa.Infrastructure.Services.UserService;
+using Wazefa.Core.DTOs.ResponseResultDtos;
+using Wazefa.Core.DTOs.UserDtos;
+using Wazefa.Services.UserService;
 
 namespace API.Controllers
 {
@@ -17,8 +20,18 @@ namespace API.Controllers
         [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> Add(AddUserRequest dto)
         {
-
-            return Ok(await _userService.AddAsync(dto));
+            AddUserValidation validations = new AddUserValidation();
+            ValidationResult validationResult = validations.Validate(dto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+            ResponseResultDto<UserResponse> result = await _userService.AddAsync(dto);
+            return Ok(result);
+        }
+        [HttpPost, Route(nameof(GetById)), ProducesResponseType(typeof(UserResponse), 200)]
+        public async Task<IActionResult> GetById(string id)
+        {
+            ResponseResultDto<UserResponse> result = await _userService.GetByIdAsync(id);
+            return Ok(result);
         }
     }
 }

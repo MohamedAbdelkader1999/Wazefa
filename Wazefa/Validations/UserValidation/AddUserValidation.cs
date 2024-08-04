@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
-using Wazefa.DTOs.UserDtos;
+using Wazefa.Core.DTOs.UserDtos;
 
 namespace API.Validations.UserValidation
 {

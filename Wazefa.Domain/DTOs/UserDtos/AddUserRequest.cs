@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.DTOs.UserDtos
+namespace Wazefa.Core.DTOs.UserDtos
 {
-    public class UpdateUserRequest
+    public class AddUserRequest
     {
-        public string Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public string? SecondaryPhoneNumber { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
+
     }
 }

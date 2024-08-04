@@ -7,11 +7,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Wazefa.Core.Interfaces;
 
-namespace Wazefa.Infrastructure.Data
+namespace Wazefa.Data
 {
-    public class Repository<T, Key> : IRepository<T,Key> where T : class
+    public class Repository<T, Key> : IRepository<T, Key> where T : class
     {
         private readonly WazefaContext _dbContext;
         private readonly DbSet<T> set;
@@ -21,7 +20,7 @@ namespace Wazefa.Infrastructure.Data
             _dbContext = dbContext;
             set = _dbContext.Set<T>();
         }
-        public IQueryable<T> GetPaged(Func<T,bool> where , int pageSize = 10 ,  int pageIndex = 0,int skip = 0,string orderBy ="Id",bool IsAscending = true ,params string[] includes)
+        public IQueryable<T> GetPaged(Func<T, bool> where, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes)
         {
             Expression<Func<T, bool>> expression = (a) => where(a);
             var query = set.AsQueryable();
@@ -60,7 +59,7 @@ namespace Wazefa.Infrastructure.Data
 
         public T? GetById(Key id) => set.Find(id);
 
-        public async Task<T?> GetByIdAsync(Key id) 
+        public async Task<T?> GetByIdAsync(Key id)
             => await set.FindAsync(id);
         public IQueryable<T> GetList(Func<T, bool> where)
         {
@@ -86,7 +85,7 @@ namespace Wazefa.Infrastructure.Data
             return await set.AnyAsync(expression);
         }
 
-        public async Task<T?> SingleOrDefaultAsync(Func<T, bool> where) 
+        public async Task<T?> SingleOrDefaultAsync(Func<T, bool> where)
         {
             Expression<Func<T, bool>> expression = (a) => where(a);
             return await set.SingleOrDefaultAsync(expression);

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Wazefa.Core.Interfaces;
-using Wazefa.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,10 +14,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using API.Extensions;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using Wazefa.Infrastructure.Services.Mapping;
+using Wazefa.Services.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Wazefa.Core.Entities;
-using Wazefa.Infrastructure.Extensions;
+using Wazefa.Data;
 
 namespace API
 {
@@ -58,7 +56,6 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wazefa API"));
-                app.ApplyMigrations();
             }
 
             app.UseRouting();

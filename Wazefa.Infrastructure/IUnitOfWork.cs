@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Entities;
 
-namespace Wazefa.Core.Interfaces
+namespace Wazefa.Data
 {
     public interface IUnitOfWork
     {
         int Save();
         Task<int> SaveAsync();
-        IRepository<User,string> userRepository { get; }
-        IRepository<RefreshToken,string> refreshTokenRepository { get; }
+        IRepository<User, string> userRepository { get; }
+        IRepository<RefreshToken, string> refreshTokenRepository { get; }
     }
 }

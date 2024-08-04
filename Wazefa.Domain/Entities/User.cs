@@ -15,7 +15,7 @@ namespace Wazefa.Core.Entities
         public string LastName { get; set; }
         public string SecondaryPhoneNumber { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
         public virtual RefreshToken RefreshToken { get; set; }
     }

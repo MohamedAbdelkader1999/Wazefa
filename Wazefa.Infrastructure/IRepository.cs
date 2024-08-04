@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.Core.Interfaces
+namespace Wazefa.Data
 {
     public interface IRepository<T, Key> where T : class
     {

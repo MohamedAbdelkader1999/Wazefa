@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.7" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Wazefa.Domain\Wazefa.Core.csproj" />
+    <ProjectReference Include="..\Wazefa.Infrastructure\Wazefa.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Entities;
-using Wazefa.Core.Interfaces;
 
-namespace Wazefa.Infrastructure.Data
+namespace Wazefa.Data
 {
     public class UnitOfWork : IUnitOfWork
     {

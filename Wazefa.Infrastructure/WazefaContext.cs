@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Entities;
-using Wazefa.Infrastructure.Data.EntityConfigurations;
+using Wazefa.Data.EntityConfigurations;
 
-namespace Wazefa.Infrastructure.Data
+namespace Wazefa.Data
 {
     public class WazefaContext : IdentityDbContext<User>
     {

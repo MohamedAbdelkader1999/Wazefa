@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wazefa.DTOs.UserDtos
+namespace Wazefa.Core.DTOs.UserDtos
 {
     public class UserResponse
     {
