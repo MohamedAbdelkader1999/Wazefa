@@ -10,10 +10,11 @@ using Wazefa.Core.DTOs.ResponseResultDtos;
 using Wazefa.Core.DTOs.UserDtos;
 using Wazefa.Core.Entities;
 using Wazefa.Data;
+using Grpc.Core;
 
 namespace Wazefa.Services.UserService
 {
-    public class UserService : IUserService
+    public class UserService : IUserService 
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -22,7 +23,7 @@ namespace Wazefa.Services.UserService
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<UserResponse> AddAsync(AddUserRequest dto)
+        public async Task<UserResponse?> AddAsync(AddUserRequest dto)
         {
             User? addedUser = await _unitOfWork.userRepository.AddAsync(_mapper.Map<User>(dto));
             await _unitOfWork.SaveAsync();
@@ -50,8 +51,8 @@ namespace Wazefa.Services.UserService
         public async Task<bool> DeleteAsync(string id)
         {
             User? user = await _unitOfWork.userRepository.GetByIdAsync(id);
-            if (user == null)
-                return null;
+            //if (user == null)
+            //    return null;
             _unitOfWork.userRepository.Delete(user);
             bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true :false;
             return isDeleted;
