@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wazefa.Core.DTOs.ResponseResultDtos;
 using Wazefa.Core.DTOs.UserDtos;
-using Wazefa.Services.UserService;
+using Wazefa.Services.UserServices;
 
 namespace API.Controllers
 {

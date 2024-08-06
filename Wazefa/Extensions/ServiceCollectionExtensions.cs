@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wazefa.Data;
 using Wazefa.Services.Mapping;
-using Wazefa.Services.UserService;
+using Wazefa.Services.UserServices;
 
 namespace API.Extensions
 {

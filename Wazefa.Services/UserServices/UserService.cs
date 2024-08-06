@@ -10,11 +10,10 @@ using Wazefa.Core.DTOs.ResponseResultDtos;
 using Wazefa.Core.DTOs.UserDtos;
 using Wazefa.Core.Entities;
 using Wazefa.Data;
-using Grpc.Core;
 
-namespace Wazefa.Services.UserService
+namespace Wazefa.Services.UserServices
 {
-    public class UserService : IUserService 
+    public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -54,7 +53,7 @@ namespace Wazefa.Services.UserService
             //if (user == null)
             //    return null;
             _unitOfWork.userRepository.Delete(user);
-            bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true :false;
+            bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true : false;
             return isDeleted;
         }
     }

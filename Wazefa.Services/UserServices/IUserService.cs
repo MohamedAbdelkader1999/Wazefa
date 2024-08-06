@@ -2,7 +2,7 @@
 using Wazefa.Core.DTOs.UserDtos;
 using Wazefa.Core.Entities;
 
-namespace Wazefa.Services.UserService
+namespace Wazefa.Services.UserServices
 {
     public interface IUserService
     {
