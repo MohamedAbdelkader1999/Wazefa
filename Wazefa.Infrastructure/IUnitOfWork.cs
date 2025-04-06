@@ -13,5 +13,7 @@ namespace Wazefa.Data
         Task<int> SaveAsync();
         IRepository<User, string> userRepository { get; }
         IRepository<RefreshToken, string> refreshTokenRepository { get; }
+        IRepository<Company, string> companyRepository { get; }
+        IRepository<Appointment, string> appointmentRepository { get; }
     }
 }

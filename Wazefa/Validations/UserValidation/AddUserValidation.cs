@@ -9,25 +9,26 @@ namespace API.Validations.UserValidation
         public AddUserValidation()
         {
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("gfs")
-                .NotNull().WithMessage("315r")
+                .NotEmpty().WithMessage("Email is required")
+                .NotNull().WithMessage("Email is required")
                 .Must((u, e) =>
                 {
                     if (e.Contains(" "))
                         return false;
                     return true;
-                });
+                }).WithMessage("First name is required");
             RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("asf")
-                .NotNull().WithMessage("qwed")
+                .NotEmpty().WithMessage("First name is required")
+                .NotNull().WithMessage("First name is required")
                 .Matches(new Regex(@"^(?!.*\d_)(?!.*_\d)[a-zA-Z0-9ء-ي ]+$"))
-                .WithMessage("fas");
+                .WithMessage("First name is Arabic or English only");
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("zxbq")
-                .NotNull().WithMessage("vbz");
+                .NotEmpty().WithMessage("Password is required")
+                .NotNull().WithMessage("Password is required")
+                .MinimumLength(8).WithMessage("Password length more than 7 characters");
             RuleFor(x => x.PhoneNumber)
-                .NotEmpty().WithMessage("vzc")
-                .NotNull().WithMessage("fasxz");
+                .NotEmpty().WithMessage("Phone Number is required")
+                .NotNull().WithMessage("Phone Number is required");
         }
     }
 }

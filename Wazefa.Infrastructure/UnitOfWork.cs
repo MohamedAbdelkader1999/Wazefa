@@ -12,14 +12,20 @@ namespace Wazefa.Data
         private readonly WazefaContext _wazefaContext;
         readonly IRepository<User, string> _userRepository;
         readonly IRepository<RefreshToken, string> _refreshTokenRepository;
+        readonly IRepository<Company, string> _companyRepository;
+        readonly IRepository<Appointment, string> _appointmentRepository;
         public UnitOfWork(WazefaContext wazefaContext)
         {
             _wazefaContext = wazefaContext;
             _userRepository = new Repository<User, string>(wazefaContext);
             _refreshTokenRepository = new Repository<RefreshToken, string>(wazefaContext);
+            _companyRepository = new Repository<Company, string>(wazefaContext);
+            _appointmentRepository = new Repository<Appointment, string>(wazefaContext);
         }
         IRepository<User, string> IUnitOfWork.userRepository => _userRepository;
         IRepository<RefreshToken, string> IUnitOfWork.refreshTokenRepository => _refreshTokenRepository;
+        IRepository<Company, string> IUnitOfWork.companyRepository => _companyRepository;
+        IRepository<Appointment, string> IUnitOfWork.appointmentRepository => _appointmentRepository;
 
         public int Save()
         {

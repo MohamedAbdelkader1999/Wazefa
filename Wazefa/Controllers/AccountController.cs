@@ -1,4 +1,5 @@
-﻿using API.Validations.UserValidation;
+﻿using API.Validations.AuthValidation;
+using API.Validations.UserValidation;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
@@ -23,11 +24,11 @@ namespace API.Controllers
         [HttpPost, Route(nameof(SignIn)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> SignIn(LoginRequestDto dto)
         {
-            //AddUserValidation validations = new AddUserValidation();
-            //ValidationResult validationResult = validations.Validate(dto);
-            //if (!validationResult.IsValid)
-            //    return BadRequest(validationResult.Errors);
-            ResponseResultDto<LoginResponseDto>? result = await _authService.SignInAsync(dto);
+            LoginValidation validations = new LoginValidation();
+            ValidationResult validationResult = validations.Validate(dto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+            ResponseResultDto<LoginResponseDto> result = await _authService.SignInAsync(dto);
             return Ok(result);
         }
         
