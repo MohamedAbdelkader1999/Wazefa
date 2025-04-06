@@ -12,8 +12,8 @@ using Wazefa.Data;
 namespace Wazefa.Data.Migrations
 {
     [DbContext(typeof(WazefaContext))]
-    [Migration("20240806103709_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250403113016_first-migration")]
+    partial class firstmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,7 @@ namespace Wazefa.Data.Migrations
             modelBuilder.Entity("Wazefa.Core.Entities.RefreshToken", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreationDate")

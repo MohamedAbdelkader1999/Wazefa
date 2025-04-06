@@ -15,6 +15,11 @@ namespace Wazefa.Data.MapperRelationShips
             builder.Entity<User>().HasOne(x => x.RefreshToken)
                 .WithOne(c => c.User)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Appointment>().HasOne(x => x.Company)
+                .WithMany(x=>x.Appointments).HasForeignKey(x=>x.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

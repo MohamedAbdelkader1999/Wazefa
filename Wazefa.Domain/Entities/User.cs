@@ -11,7 +11,7 @@ namespace Wazefa.Core.Entities
     //[Table(nameof(User))]
     public class User : IdentityUser
     {
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
         public string LastName { get; set; }
         public string SecondaryPhoneNumber { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;

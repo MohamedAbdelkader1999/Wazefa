@@ -9,9 +9,9 @@ using Wazefa.Core.Entities;
 
 namespace Wazefa.Data.EntityConfigurations
 {
-    public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+    public class CompanyConfiguration : IEntityTypeConfiguration<Company>
     {
-        public void Configure(EntityTypeBuilder<RefreshToken> builder)
+        public void Configure(EntityTypeBuilder<Company> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

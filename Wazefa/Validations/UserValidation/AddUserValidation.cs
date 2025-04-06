@@ -9,8 +9,8 @@ namespace API.Validations.UserValidation
         public AddUserValidation()
         {
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("")
-                .NotNull().WithMessage("")
+                .NotEmpty().WithMessage("gfs")
+                .NotNull().WithMessage("315r")
                 .Must((u, e) =>
                 {
                     if (e.Contains(" "))
@@ -18,16 +18,16 @@ namespace API.Validations.UserValidation
                     return true;
                 });
             RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("")
-                .NotNull().WithMessage("")
+                .NotEmpty().WithMessage("asf")
+                .NotNull().WithMessage("qwed")
                 .Matches(new Regex(@"^(?!.*\d_)(?!.*_\d)[a-zA-Z0-9ء-ي ]+$"))
-                .WithMessage("");
+                .WithMessage("fas");
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("")
-                .NotNull().WithMessage("");
+                .NotEmpty().WithMessage("zxbq")
+                .NotNull().WithMessage("vbz");
             RuleFor(x => x.PhoneNumber)
-                .NotEmpty().WithMessage("")
-                .NotNull().WithMessage("");
+                .NotEmpty().WithMessage("vzc")
+                .NotNull().WithMessage("fasxz");
         }
     }
 }

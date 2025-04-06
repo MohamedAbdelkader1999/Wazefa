@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Wazefa.Core.ConfigurationDtos;
 using Wazefa.Data;
+using Wazefa.Services.AuthServices;
 using Wazefa.Services.Mapping;
 using Wazefa.Services.UserServices;
 
@@ -25,11 +27,17 @@ namespace API.Extensions
             return services
                 .AddAutoMapper(typeof(MappingProfile));
         }
-        public static IServiceCollection AddBusinessServices(this IServiceCollection services
-           )
+        public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             return services
-                .AddScoped<IUserService,UserService>();
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<IAuthService, AuthService>()
+                ;
+        }
+        public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
+        {
+            return services.Configure<AuthSettings>(configuration.GetSection("AuthSetting"))
+            ;
         }
     }
 }

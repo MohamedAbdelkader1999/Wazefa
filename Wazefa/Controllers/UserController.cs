@@ -1,6 +1,7 @@
 ﻿using API.Validations.UserValidation;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wazefa.Core.DTOs.ResponseResultDtos;
@@ -18,20 +19,26 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
+        [HttpPost,Authorize(Roles ="Admin"), Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> Add(AddUserRequest dto)
         {
             AddUserValidation validations = new AddUserValidation();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
-            UserResponse? result = await _userService.AddAsync(dto);
+            ResponseResultDto<UserResponse> result = await _userService.AddAsync(dto);
+            return Ok(result);
+        }
+        [HttpGet, Route(nameof(GetPagedList)), ProducesResponseType(typeof(UserResponse), 200)]
+        public async Task<IActionResult> GetPagedList(string id)
+        {
+            ResponseResultDto<UserResponse> result = await _userService.GetByIdAsync(id);
             return Ok(result);
         }
         [HttpGet, Route(nameof(GetById)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> GetById(string id)
         {
-            UserResponse? result = await _userService.GetByIdAsync(id);
+            ResponseResultDto<UserResponse> result = await _userService.GetByIdAsync(id);
             return Ok(result);
         }
         [HttpPatch, Route(nameof(Update)), ProducesResponseType(typeof(UserResponse), 200)]
@@ -41,13 +48,13 @@ namespace API.Controllers
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
-            UserResponse? result = await _userService.UpdateAsync(dto);
+            ResponseResultDto<UserResponse> result = await _userService.UpdateAsync(dto);
             return Ok(result);
         }
         [HttpDelete, Route(nameof(Delete)), ProducesResponseType(typeof(bool), 200)]
         public async Task<IActionResult> Delete(string id)
         {
-            bool result = await _userService.DeleteAsync(id);
+            ResponseResultDto<bool> result = await _userService.DeleteAsync(id);
             return Ok(result);
         }
     }

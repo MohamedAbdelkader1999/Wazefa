@@ -9,35 +9,35 @@ namespace Wazefa.Core.DTOs.ResponseResultDtos
 {
     public class ResponseResultDto<T>
     {
-        public int statusCode {  get; set; }
+        public int StatusCode {  get; set; }
         public T? Data { get; set; }
         public string? Message { get; set; }
 
         public ResponseResultDto<T> MappingResponse()
         {
-            this.statusCode = (int)HttpStatusCode.NotFound;
+            this.StatusCode = (int)HttpStatusCode.NotFound;
             return this;
         }
         public ResponseResultDto<T> MappingResponse(int statusCode)
         {
-            this.statusCode = statusCode;
+            this.StatusCode = statusCode;
             return this;
         }
         public ResponseResultDto<T> MappingResponse(T data)
         {
-            this.statusCode = (int)HttpStatusCode.OK;
+            this.StatusCode = (int)HttpStatusCode.OK;
             this.Data = data;
             return this;
         }
         public ResponseResultDto<T> MappingResponse(int statusCode,string message)
         {
-            this.statusCode = statusCode;
+            this.StatusCode = statusCode;
             this.Message = message;
             return this;
         }
         public ResponseResultDto<T> MappingResponse(string message)
         {
-            this.statusCode = (int)HttpStatusCode.BadRequest;
+            this.StatusCode = (int)HttpStatusCode.BadRequest;
             this.Message = message;
             return this;
         }
