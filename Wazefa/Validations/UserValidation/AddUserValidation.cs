@@ -11,9 +11,9 @@ namespace API.Validations.UserValidation
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Email is required")
                 .NotNull().WithMessage("Email is required")
-                .Must((u, e) =>
+                .Must((obj, name) =>
                 {
-                    if (e.Contains(" "))
+                    if (string.IsNullOrWhiteSpace(name))
                         return false;
                     return true;
                 }).WithMessage("First name is required");
@@ -27,8 +27,8 @@ namespace API.Validations.UserValidation
                 .NotNull().WithMessage("Password is required")
                 .MinimumLength(8).WithMessage("Password length more than 7 characters");
             RuleFor(x => x.PhoneNumber)
-                .NotEmpty().WithMessage("Phone Number is required")
-                .NotNull().WithMessage("Phone Number is required");
+                .NotEmpty().WithMessage("Phone number is required")
+                .NotNull().WithMessage("Phone number is required");
         }
     }
 }

@@ -10,9 +10,9 @@ namespace API.Validations.AppointmentValidation
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required")
                 .NotNull().WithMessage("Name is required")
-                .Must((u, e) =>
+                .Must((obj, name) =>
                 {
-                    if (e.Contains(" "))
+                    if (string.IsNullOrWhiteSpace(name))
                         return false;
                     return true;
                 }).WithMessage("Name is required");
