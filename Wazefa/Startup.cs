@@ -20,6 +20,9 @@ using Wazefa.Core.Entities;
 using Wazefa.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
+using LoggerService;
+using API.CustomExceptionMiddleware;
 
 namespace API
 {
@@ -34,11 +37,16 @@ namespace API
         {
             // Application services
             services.AddEndpointsApiExplorer();
+            LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             services
                 .AddAutoMapperService()
                 .AddUnitOfWorkAndRepository()
                 .AddBusinessServices()
-                .AddConfigurations(Configuration);
+                .ConfigureLoggerService()
+                .AddConfigurations(Configuration)
+                ;
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
             services.AddDbContext<WazefaContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User,IdentityRole>(c =>
@@ -103,24 +111,23 @@ namespace API
                 
             });
             services.AddAuthorization();
+            
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseExceptionHandler(x => { });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wazefa API"));
             }
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

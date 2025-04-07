@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using API.CustomExceptionMiddleware;
+using LoggerService;
+using Microsoft.EntityFrameworkCore;
 using Wazefa.Core.ConfigurationDtos;
 using Wazefa.Data;
 using Wazefa.Services.AuthServices;
@@ -39,5 +41,12 @@ namespace API.Extensions
             return services.Configure<AuthSettings>(configuration.GetSection("AuthSetting"))
             ;
         }
+        public static IServiceCollection ConfigureLoggerService(this IServiceCollection services)
+            => services.AddSingleton<ILoggerManager, LoggerManager>();
+        
+        //public static void ConfigureCustomExceptionMiddleware(this IApplicationBuilder app)
+        //    => app.UseMiddleware<ExceptionMiddleware>();
+        
+
     }
 }

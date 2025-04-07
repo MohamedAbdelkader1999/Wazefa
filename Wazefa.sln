@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa.Data", "Wazefa.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wazefa.Services", "Wazefa.Services\Wazefa.Services.csproj", "{542AF1C6-F5B8-4128-87E9-2AC202FC2CF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{32E9CDC9-A2C2-4F1F-8067-B5203E6574D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{542AF1C6-F5B8-4128-87E9-2AC202FC2CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542AF1C6-F5B8-4128-87E9-2AC202FC2CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542AF1C6-F5B8-4128-87E9-2AC202FC2CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E9CDC9-A2C2-4F1F-8067-B5203E6574D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E9CDC9-A2C2-4F1F-8067-B5203E6574D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E9CDC9-A2C2-4F1F-8067-B5203E6574D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E9CDC9-A2C2-4F1F-8067-B5203E6574D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
