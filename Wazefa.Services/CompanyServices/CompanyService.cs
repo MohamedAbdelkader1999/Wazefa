@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wazefa.Core.DTOs.CompanyDtos;
 using Wazefa.Core.DTOs.ResponseResultDtos;
 using Wazefa.Core.Entities;
@@ -21,13 +16,44 @@ namespace Wazefa.Services.CompanyServices
             _mapper = mapper;
         }
 
-        public async Task<ResponseResultDto<CompanyResponseDto>> Add(AddCompanyRequest dto)
+        public async Task<ResponseResultDto<CompanyResponse>> AddAsync(AddCompanyRequest dto, string userId)
         {
-            ResponseResultDto<CompanyResponseDto> response = new();
+            ResponseResultDto<CompanyResponse> response = new();
             Company entity = _mapper.Map<Company>(dto);
+            entity.CreatedByUserId = userId;
             Company? result = await _unitOfWork.companyRepository.AddAsync(entity);
             await _unitOfWork.SaveAsync();
-            return response.MappingResponse(_mapper.Map<CompanyResponseDto>(result));
+            return response.MappingResponse(_mapper.Map<CompanyResponse>(result));
+        }
+        public async Task<ResponseResultDto<CompanyResponse>> GetByIdAsync(string id)
+        {
+            var response = new ResponseResultDto<CompanyResponse>();
+            Company? company = await _unitOfWork.companyRepository.GetByIdAsync(id);
+            if (company == null)
+                return response.MappingResponse();
+            return response.MappingResponse(_mapper.Map<CompanyResponse>(company));
+        }
+        public async Task<ResponseResultDto<CompanyResponse>> UpdateAsync(UpdateCompanyRequest dto, string userId)
+        {
+            var response = new ResponseResultDto<CompanyResponse>();
+            Company? entity = await _unitOfWork.companyRepository.GetByIdAsync(dto.Id);
+            User? loggedInUser = await _unitOfWork.userRepository.GetByIdAsync(userId);
+            if (entity == null || loggedInUser == null)
+                return response.MappingResponse();
+            _mapper.Map(dto, entity);
+            entity.ModificationDate = DateTime.UtcNow;
+            Company updatedEntity = _unitOfWork.companyRepository.Update(entity);
+            return response.MappingResponse(_mapper.Map<CompanyResponse>(entity));
+        }
+        public async Task<ResponseResultDto<bool>> DeleteAsync(string id)
+        {
+            var response = new ResponseResultDto<bool>();
+            Company? company = await _unitOfWork.companyRepository.GetByIdAsync(id);
+            if (company == null)
+                return response.MappingResponse();
+            _unitOfWork.companyRepository.Delete(company);
+            bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true : false;
+            return response.MappingResponse(isDeleted);
         }
     }
 }

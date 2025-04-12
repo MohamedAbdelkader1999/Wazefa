@@ -25,11 +25,11 @@ namespace Wazefa.Services.Mapping
             //Company
             CreateMap<AddCompanyRequest, Company>();
             CreateMap<UpdateCompanyRequest, Company>();
-            CreateMap<Company, CompanyResponseDto>();
+            CreateMap<Company, CompanyResponse>();
             //Appointment
             CreateMap<AddAppointmentRequest, Appointment>();
             CreateMap<UpdateAppointmentRequest, Appointment>();
-            CreateMap<Appointment, AppointmentResponseDto>()
+            CreateMap<Appointment, AppointmentResponse>()
                 .ForMember(x => x.CompanyName, xx => xx.MapFrom(x => x.Company.Name))
                 ;
         }

@@ -20,9 +20,6 @@ namespace API.Validations.AppointmentValidation
                 .NotEmpty().WithMessage("Enter job description")
                 .NotNull().WithMessage("Enter job description");
 
-            RuleFor(x => x.CompanyId)
-                .NotEmpty().WithMessage("Company is required")
-                .NotNull().WithMessage("Company is required");
 
         }
     }

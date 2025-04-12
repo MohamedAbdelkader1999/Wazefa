@@ -41,7 +41,7 @@ namespace Wazefa.Services.AuthServices
                 return response;
             }
             //validate if this user can authenticate or not
-            JwtSecurityToken generatedToken = await this.GenerateToken(user, DateTime.Now.AddDays(Convert.ToDouble(_authSetting.ExpireAfterDays)));
+            JwtSecurityToken generatedToken = await this.GenerateToken(user, DateTime.UtcNow.AddDays(Convert.ToDouble(_authSetting.ExpireAfterDays)));
             string tokenString = new JwtSecurityTokenHandler().WriteToken(generatedToken);
             response.Data.Token = tokenString;
             response.Data.UserName = user.FirstName + " " + user.LastName;
@@ -56,7 +56,7 @@ namespace Wazefa.Services.AuthServices
                 response.Data.RefreshToken = generatedRefreshToken;
                 user.RefreshToken = new RefreshToken
                 {
-                    CreationDate = DateTime.Now,
+                    CreationDate = DateTime.UtcNow,
                     ExpiredOn = refreshToken.ValidTo,
                     Token = generatedRefreshToken,
                     UserId = user.Id

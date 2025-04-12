@@ -3,7 +3,9 @@ using LoggerService;
 using Microsoft.EntityFrameworkCore;
 using Wazefa.Core.ConfigurationDtos;
 using Wazefa.Data;
+using Wazefa.Services.AppointmentServices;
 using Wazefa.Services.AuthServices;
+using Wazefa.Services.CompanyServices;
 using Wazefa.Services.Mapping;
 using Wazefa.Services.UserServices;
 
@@ -34,6 +36,8 @@ namespace API.Extensions
             return services
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IAuthService, AuthService>()
+                .AddScoped<ICompanyService, CompanyService>()
+                .AddScoped<IAppointmentService, AppointmentService>()
                 ;
         }
         public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)

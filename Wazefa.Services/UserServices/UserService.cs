@@ -60,7 +60,7 @@ namespace Wazefa.Services.UserServices
             if (user == null)
                 return response.MappingResponse();
             _mapper.Map(dto, user);
-            user.ModificationDate = DateTime.Now;
+            user.ModificationDate = DateTime.UtcNow;
             IdentityResult updatedUser = await _userManager.UpdateAsync(user);
             return response.MappingResponse(_mapper.Map<UserResponse>(user));
         }

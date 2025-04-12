@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wazefa.Core.Entities;
 using Wazefa.Data.EntityConfigurations;
+using Wazefa.Data.MapperRelationShips;
 
 namespace Wazefa.Data
 {
@@ -33,6 +34,7 @@ namespace Wazefa.Data
             new RefreshTokenConfiguration().Configure(modelBuilder.Entity<RefreshToken>());
             new CompanyConfiguration().Configure(modelBuilder.Entity<Company>());
             new AppointmentConfiguration().Configure(modelBuilder.Entity<Appointment>());
+            MapperRelationships.MapRelationships(modelBuilder);
             base.OnModelCreating(modelBuilder);
 
         }

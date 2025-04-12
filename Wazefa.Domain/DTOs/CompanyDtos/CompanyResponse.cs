@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wazefa.Core.DTOs.CompanyDtos
 {
-    public class CompanyResponseDto
+    public class CompanyResponse
     {
         public string Id { get; set; }
         public required string Name { get; set; }
