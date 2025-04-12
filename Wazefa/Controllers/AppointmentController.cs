@@ -10,6 +10,7 @@ using Wazefa.Services.AppointmentServices;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class AppointmentController : AppBaseController
     {
         private readonly IAppointmentService _appointmentService;
@@ -19,7 +20,7 @@ namespace API.Controllers
             _appointmentService = appointmentService;
         }
 
-        [HttpPost,Authorize(Roles ="Admin"), Route(nameof(Add)), ProducesResponseType(typeof(AppointmentResponse), 200)]
+        [HttpPost,, Route(nameof(Add)), ProducesResponseType(typeof(AppointmentResponse), 200)]
         public async Task<IActionResult> Add(AddAppointmentRequest dto)
         {
             AddAppointmentValidation validations = new AddAppointmentValidation();

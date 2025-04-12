@@ -10,6 +10,7 @@ using Wazefa.Services.CompanyServices;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class CompanyController : AppBaseController
     {
         private readonly ICompanyService _companyService;
@@ -19,7 +20,7 @@ namespace API.Controllers
             _companyService = companyService;
         }
 
-        [HttpPost,Authorize(Roles ="Admin"), Route(nameof(Add)), ProducesResponseType(typeof(CompanyResponse), 200)]
+        [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(CompanyResponse), 200)]
         public async Task<IActionResult> Add(AddCompanyRequest dto)
         {
             AddCompanyValidation validations = new AddCompanyValidation();
