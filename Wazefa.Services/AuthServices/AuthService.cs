@@ -31,8 +31,10 @@ namespace Wazefa.Services.AuthServices
 
         public async Task<ResponseResultDto<LoginResponseDto>> SignInAsync(LoginRequestDto dto)
         {
-            ResponseResultDto<LoginResponseDto> response = new ();
-            response.Data = new LoginResponseDto();
+            ResponseResultDto<LoginResponseDto> response = new()
+            {
+                Data = new()
+            };
             User? user = await _userManager.FindByEmailAsync(dto.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, dto.Password))
             {
@@ -54,7 +56,7 @@ namespace Wazefa.Services.AuthServices
                 JwtSecurityToken refreshToken = this.GenerateRefreshToken(user);
                 string generatedRefreshToken = new JwtSecurityTokenHandler().WriteToken(refreshToken);
                 response.Data.RefreshToken = generatedRefreshToken;
-                user.RefreshToken = new RefreshToken
+                user.RefreshToken = new ()
                 {
                     CreationDate = DateTime.UtcNow,
                     ExpiredOn = refreshToken.ValidTo,
@@ -68,13 +70,13 @@ namespace Wazefa.Services.AuthServices
         public async Task<JwtSecurityToken> GenerateToken(User user, DateTime expireOn)
         {
             IList<string> userRoles = await _userManager.GetRolesAsync(user);
-            List<Claim> claims = new List<Claim>
-                        {
-                         new Claim (ClaimTypes.Name,user.FirstName + " " + user.LastName),
-                         new Claim (ClaimTypes.NameIdentifier,user.Id.ToString()),
-                         new Claim (ClaimTypes.Email,user.Email ?? ""),
-                         new Claim (ClaimTypes.Role , userRoles.FirstOrDefault())
-                        };
+            List<Claim> claims =
+                        [
+                         new (ClaimTypes.Name,user.FirstName + " " + user.LastName),
+                         new (ClaimTypes.NameIdentifier,user.Id.ToString()),
+                         new (ClaimTypes.Email,user.Email ?? ""),
+                         new (ClaimTypes.Role , userRoles.FirstOrDefault())
+                        ];
             var key = Encoding.ASCII.GetBytes(_authSetting.Key);
             JwtSecurityToken tokenOptions = new JwtSecurityToken(
                 claims: claims,
@@ -84,15 +86,15 @@ namespace Wazefa.Services.AuthServices
         }
         public JwtSecurityToken GenerateRefreshToken(User user)
         {
-            List<Claim> claims = new List<Claim>
-                        {
-                         new Claim (ClaimTypes.NameIdentifier,user.Id.ToString())
-                        };
+            List<Claim> claims =
+                        [
+                         new (ClaimTypes.NameIdentifier,user.Id.ToString())
+                        ];
             var key = Encoding.ASCII.GetBytes(_authSetting.Key);
-            JwtSecurityToken tokenOptions = new JwtSecurityToken(
+            JwtSecurityToken tokenOptions = new(
                 claims: claims,
                 expires: null,
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
+                signingCredentials: new (new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
             return tokenOptions;
         }
     }
