@@ -23,7 +23,7 @@ namespace API.Controllers
         [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(CompanyResponse), 200)]
         public async Task<IActionResult> Add(AddCompanyRequest dto)
         {
-            AddCompanyValidation validations = new AddCompanyValidation();
+            AddCompanyValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
@@ -45,7 +45,7 @@ namespace API.Controllers
         [HttpPatch, Route(nameof(Update)), ProducesResponseType(typeof(CompanyResponse), 200)]
         public async Task<IActionResult> Update(UpdateCompanyRequest dto)
         {
-            UpdateCompanyValidation validations = new UpdateCompanyValidation();
+            UpdateCompanyValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);

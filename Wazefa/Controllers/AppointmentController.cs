@@ -20,10 +20,10 @@ namespace API.Controllers
             _appointmentService = appointmentService;
         }
 
-        [HttpPost,, Route(nameof(Add)), ProducesResponseType(typeof(AppointmentResponse), 200)]
+        [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(AppointmentResponse), 200)]
         public async Task<IActionResult> Add(AddAppointmentRequest dto)
         {
-            AddAppointmentValidation validations = new AddAppointmentValidation();
+            AddAppointmentValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
@@ -45,7 +45,7 @@ namespace API.Controllers
         [HttpPatch, Route(nameof(Update)), ProducesResponseType(typeof(AppointmentResponse), 200)]
         public async Task<IActionResult> Update(UpdateAppointmentRequest dto)
         {
-            UpdateAppointmentValidation validations = new UpdateAppointmentValidation();
+            UpdateAppointmentValidation validations = new();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);

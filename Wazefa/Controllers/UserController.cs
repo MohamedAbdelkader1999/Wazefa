@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpPost,Authorize(Roles ="Admin"), Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> Add(AddUserRequest dto)
         {
-            AddUserValidation validations = new AddUserValidation();
+            AddUserValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
@@ -44,7 +44,7 @@ namespace API.Controllers
         [HttpPatch, Route(nameof(Update)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> Update(UpdateUserRequest dto)
         {
-            UpdateUserValidation validations = new UpdateUserValidation();
+            UpdateUserValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);

@@ -24,7 +24,7 @@ namespace API.Controllers
         [HttpPost, Route(nameof(SignIn)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> SignIn(LoginRequestDto dto)
         {
-            LoginValidation validations = new LoginValidation();
+            LoginValidation validations = new ();
             ValidationResult validationResult = validations.Validate(dto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);

@@ -27,7 +27,7 @@ namespace Wazefa.Services.CompanyServices
         }
         public async Task<ResponseResultDto<CompanyResponse>> GetByIdAsync(string id)
         {
-            var response = new ResponseResultDto<CompanyResponse>();
+            ResponseResultDto<CompanyResponse> response = new ();
             Company? company = await _unitOfWork.companyRepository.GetByIdAsync(id);
             if (company == null)
                 return response.MappingResponse();
@@ -35,7 +35,7 @@ namespace Wazefa.Services.CompanyServices
         }
         public async Task<ResponseResultDto<CompanyResponse>> UpdateAsync(UpdateCompanyRequest dto, string userId)
         {
-            var response = new ResponseResultDto<CompanyResponse>();
+            ResponseResultDto<CompanyResponse> response = new ();
             Company? entity = await _unitOfWork.companyRepository.GetByIdAsync(dto.Id);
             User? loggedInUser = await _unitOfWork.userRepository.GetByIdAsync(userId);
             if (entity == null || loggedInUser == null)
@@ -47,7 +47,7 @@ namespace Wazefa.Services.CompanyServices
         }
         public async Task<ResponseResultDto<bool>> DeleteAsync(string id)
         {
-            var response = new ResponseResultDto<bool>();
+            ResponseResultDto<bool> response = new ();
             Company? company = await _unitOfWork.companyRepository.GetByIdAsync(id);
             if (company == null)
                 return response.MappingResponse();
