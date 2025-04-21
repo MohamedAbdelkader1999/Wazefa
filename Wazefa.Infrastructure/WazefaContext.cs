@@ -12,12 +12,8 @@ using Wazefa.Data.MapperRelationShips;
 
 namespace Wazefa.Data
 {
-    public class WazefaContext : IdentityDbContext<User>
+    public class WazefaContext(DbContextOptions<WazefaContext> options) : IdentityDbContext<User>(options)
     {
-        public WazefaContext(DbContextOptions<WazefaContext> options) : base(options)
-        {
-
-        }
         //public new DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Company> Companies { get; set; }

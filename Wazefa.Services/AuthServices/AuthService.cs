@@ -72,16 +72,16 @@ namespace Wazefa.Services.AuthServices
             IList<string> userRoles = await _userManager.GetRolesAsync(user);
             List<Claim> claims =
                         [
-                         new (ClaimTypes.Name,user.FirstName + " " + user.LastName),
-                         new (ClaimTypes.NameIdentifier,user.Id.ToString()),
-                         new (ClaimTypes.Email,user.Email ?? ""),
+                         new (ClaimTypes.Name , user.FirstName + " " + user.LastName),
+                         new (ClaimTypes.NameIdentifier , user.Id.ToString()),
+                         new (ClaimTypes.Email , user.Email ?? ""),
                          new (ClaimTypes.Role , userRoles.FirstOrDefault())
                         ];
             var key = Encoding.ASCII.GetBytes(_authSetting.Key);
-            JwtSecurityToken tokenOptions = new JwtSecurityToken(
+            JwtSecurityToken tokenOptions = new (
                 claims: claims,
                 expires: expireOn,
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
+                signingCredentials: new (new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
             return tokenOptions;
         }
         public JwtSecurityToken GenerateRefreshToken(User user)

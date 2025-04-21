@@ -7,21 +7,14 @@ using Wazefa.Core.Entities;
 
 namespace Wazefa.Data
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(WazefaContext wazefaContext) : IUnitOfWork
     {
-        private readonly WazefaContext _wazefaContext;
-        readonly IRepository<User, string> _userRepository;
-        readonly IRepository<RefreshToken, string> _refreshTokenRepository;
-        readonly IRepository<Company, string> _companyRepository;
-        readonly IRepository<Appointment, string> _appointmentRepository;
-        public UnitOfWork(WazefaContext wazefaContext)
-        {
-            _wazefaContext = wazefaContext;
-            _userRepository = new Repository<User, string>(wazefaContext);
-            _refreshTokenRepository = new Repository<RefreshToken, string>(wazefaContext);
-            _companyRepository = new Repository<Company, string>(wazefaContext);
-            _appointmentRepository = new Repository<Appointment, string>(wazefaContext);
-        }
+        private readonly WazefaContext _wazefaContext = wazefaContext;
+        readonly IRepository<User, string> _userRepository = new Repository<User, string>(wazefaContext);
+        readonly IRepository<RefreshToken, string> _refreshTokenRepository = new Repository<RefreshToken, string>(wazefaContext);
+        readonly IRepository<Company, string> _companyRepository = new Repository<Company, string>(wazefaContext);
+        readonly IRepository<Appointment, string> _appointmentRepository = new Repository<Appointment, string>(wazefaContext);
+
         IRepository<User, string> IUnitOfWork.userRepository => _userRepository;
         IRepository<RefreshToken, string> IUnitOfWork.refreshTokenRepository => _refreshTokenRepository;
         IRepository<Company, string> IUnitOfWork.companyRepository => _companyRepository;
