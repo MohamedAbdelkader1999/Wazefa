@@ -9,11 +9,15 @@ using Wazefa.Core.Entities;
 
 namespace Wazefa.Data.EntityConfigurations
 {
-    public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
+
+    public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
     {
-        public void Configure(EntityTypeBuilder<Appointment> builder)
+        public void Configure(EntityTypeBuilder<UserRole> builder)
         {
+            builder.ToTable("UserRole");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
         }
     }
 }

@@ -11,6 +11,10 @@ namespace Wazefa.Core.Entities
     [Table(nameof(RefreshToken))]
     public class RefreshToken
     {
+        public RefreshToken() 
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         public string Id { get; set; }
         public required string Token { get; set; }
         public required string UserId { get; set; }

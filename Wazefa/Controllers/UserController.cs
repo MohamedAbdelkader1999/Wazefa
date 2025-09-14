@@ -19,7 +19,7 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpPost,Authorize(Roles ="Admin"), Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
+        [HttpPost, Route(nameof(Add)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> Add(AddUserRequest dto)
         {
             AddUserValidation validations = new ();
@@ -38,6 +38,7 @@ namespace API.Controllers
         [HttpGet, Route(nameof(GetById)), ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> GetById(string id)
         {
+            var user = User.Identity;
             ResponseResultDto<UserResponse> result = await _userService.GetByIdAsync(id);
             return Ok(result);
         }

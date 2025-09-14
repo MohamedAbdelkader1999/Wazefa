@@ -15,12 +15,12 @@ namespace Wazefa.Services.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<AddUserRequest, User>().ForMember(x=>x.UserName,xx=>xx.MapFrom(c=>c.Email));
+            CreateMap<AddUserRequest, User>();
             CreateMap<UpdateUserRequest, User>()
-                .ForMember(x=>x.Id ,xx=>xx.MapFrom(c=>c.Id))
-                .ForMember(x => x.UserName, xx => xx.MapFrom(c => c.Email));
+                .ForMember(x=>x.Id ,xx=>xx.MapFrom(c=>c.Id));
             CreateMap<User, UserResponse>()
                 .ForMember(x => x.FullName, xx => xx.MapFrom(x => x.FirstName + " " + x.LastName))
+                .ForMember(x => x.Role, xx => xx.MapFrom(x => x.Role.Name))
                 ;
             //Company
             CreateMap<AddCompanyRequest, Company>();

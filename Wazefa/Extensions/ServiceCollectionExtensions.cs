@@ -1,12 +1,15 @@
 ﻿using API.CustomExceptionMiddleware;
 using LoggerService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wazefa.Core.ConfigurationDtos;
+using Wazefa.Core.Entities;
 using Wazefa.Data;
 using Wazefa.Services.AppointmentServices;
 using Wazefa.Services.AuthServices;
 using Wazefa.Services.CompanyServices;
 using Wazefa.Services.Mapping;
+using Wazefa.Services.Shared;
 using Wazefa.Services.UserServices;
 
 namespace API.Extensions
@@ -34,6 +37,8 @@ namespace API.Extensions
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             return services
+                .AddScoped<PasswordHasher<User>>()
+                .AddScoped<ISharedService, SharedService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<ICompanyService, CompanyService>()

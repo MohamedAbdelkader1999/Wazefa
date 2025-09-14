@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +10,10 @@ using Wazefa.Data.MapperRelationShips;
 
 namespace Wazefa.Data
 {
-    public class WazefaContext(DbContextOptions<WazefaContext> options) : IdentityDbContext<User>(options)
+    public class WazefaContext(DbContextOptions<WazefaContext> options) : DbContext(options)
     {
-        //public new DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
@@ -27,6 +26,7 @@ namespace Wazefa.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new UserConfiguration().Configure(modelBuilder.Entity<User>());
+            new UserRoleConfiguration().Configure(modelBuilder.Entity<UserRole>());
             new RefreshTokenConfiguration().Configure(modelBuilder.Entity<RefreshToken>());
             new CompanyConfiguration().Configure(modelBuilder.Entity<Company>());
             new AppointmentConfiguration().Configure(modelBuilder.Entity<Appointment>());

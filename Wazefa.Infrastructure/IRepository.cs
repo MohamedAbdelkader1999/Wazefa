@@ -15,15 +15,15 @@ namespace Wazefa.Data
         Task AddAsync(List<T> entities);
         T? GetById(Key id);
         Task<T?> GetByIdAsync(Key id);
-        IQueryable<T> GetList(Func<T, bool> where);
+        IQueryable<T> GetList(Expression<Func<T, bool>> expression);
         T Update(T entity);
         void Update(List<T> entities);
         void Delete(T entity);
         void Delete(List<T> entities);
-        Task<bool> AnyAsync(Func<T, bool> where);
-        bool Any(Func<T, bool> where);
-        Task<T?> SingleOrDefaultAsync(Func<T, bool> where);
-        T? SingleOrDefault(Func<T, bool> where);
-        IQueryable<T> GetPaged(Func<T, bool> where, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
+        bool Any(Expression<Func<T, bool>> expression);
+        Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> expression);
+        T? SingleOrDefault(Expression<Func<T, bool>> expression);
+        IQueryable<T> GetPaged(Expression<Func<T, bool>> expression, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes);
     }
 }

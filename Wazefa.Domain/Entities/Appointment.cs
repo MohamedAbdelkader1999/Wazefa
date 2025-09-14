@@ -10,6 +10,10 @@ namespace Wazefa.Core.Entities
 {
     public class Appointment
     {
+        public Appointment()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         public string Id { get; set; }
         public required string Name { get; set; }
         public required string CompanyId { get; set; }

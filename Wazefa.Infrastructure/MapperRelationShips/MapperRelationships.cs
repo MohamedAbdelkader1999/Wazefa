@@ -29,7 +29,9 @@ namespace Wazefa.Data.MapperRelationShips
                .WithOne(x => x.CreatedByUser).HasForeignKey(x => x.CreatedByUserId)
                .OnDelete(DeleteBehavior.NoAction);
 
-
+            builder.Entity<User>().HasOne(x => x.Role)
+               .WithMany(x => x.Users).HasForeignKey(x => x.RoleId)
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

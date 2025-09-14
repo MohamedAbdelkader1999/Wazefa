@@ -10,6 +10,6 @@ namespace Wazefa.Services.AuthServices
 {
     public interface IAuthService
     {
-        Task<ResponseResultDto<LoginResponseDto>> SignInAsync(LoginRequestDto dto);
+        Task<(ResponseResultDto<LoginResponseDto> dto, string userId)> SignInAsync(LoginRequestDto dto);
     }
 }

@@ -14,7 +14,6 @@ namespace Wazefa.Data.EntityConfigurations
         public void Configure(EntityTypeBuilder<Company> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
         }
     }
 }

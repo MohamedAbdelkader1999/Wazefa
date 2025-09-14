@@ -14,7 +14,7 @@ namespace Wazefa.Core.DTOs.UserDtos
         public string? SecondaryPhoneNumber { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
-        public string RoleName { get; set; }
+        public string RoleId { get; set; }
 
     }
 }

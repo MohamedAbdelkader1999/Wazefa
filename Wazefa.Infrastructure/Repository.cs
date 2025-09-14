@@ -20,9 +20,8 @@ namespace Wazefa.Data
             _dbContext = dbContext;
             set = _dbContext.Set<T>();
         }
-        public IQueryable<T> GetPaged(Func<T, bool> where, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes)
+        public IQueryable<T> GetPaged(Expression<Func<T, bool>> expression, int pageSize = 10, int pageIndex = 0, int skip = 0, string orderBy = "Id", bool IsAscending = true, params string[] includes)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             var query = set.AsQueryable();
             if (includes != null && includes.Length > 0)
                 foreach (string i in includes)
@@ -61,9 +60,8 @@ namespace Wazefa.Data
 
         public async Task<T?> GetByIdAsync(Key id)
             => await set.FindAsync(id);
-        public IQueryable<T> GetList(Func<T, bool> where)
+        public IQueryable<T> GetList(Expression<Func<T, bool>> expression)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             return set.Where(expression);
         }
         public T Update(T entity)
@@ -74,26 +72,21 @@ namespace Wazefa.Data
 
         public void Update(List<T> entities) =>
              set.UpdateRange(entities);
-        public bool Any(Func<T, bool> where)
+        public bool Any(Expression<Func<T, bool>> expression)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             return set.Any(expression);
         }
-        public async Task<bool> AnyAsync(Func<T, bool> where)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             return await set.AnyAsync(expression);
         }
 
-        public async Task<T?> SingleOrDefaultAsync(Func<T, bool> where)
+        public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> expression)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             return await set.SingleOrDefaultAsync(expression);
-
         }
-        public T? SingleOrDefault(Func<T, bool> where)
+        public T? SingleOrDefault(Expression<Func<T, bool>> expression)
         {
-            Expression<Func<T, bool>> expression = (a) => where(a);
             return set.SingleOrDefault(expression);
         }
 

@@ -11,31 +11,20 @@ using Wazefa.Core.DTOs.ResponseResultDtos;
 using Wazefa.Core.DTOs.UserDtos;
 using Wazefa.Core.Entities;
 using Wazefa.Data;
+using Wazefa.Services.Shared;
 
 namespace Wazefa.Services.UserServices
 {
-    public class UserService : IUserService
+    public class UserService(IUnitOfWork unitOfWork, IMapper mapper,ISharedService sharedService) : IUserService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IMapper _mapper;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
         public async Task<ResponseResultDto<UserResponse>> AddAsync(AddUserRequest dto)
         {
-            var response = new ResponseResultDto<UserResponse>();
-            User userToAdd = _mapper.Map<User>(dto);
-            var result = await _userManager.CreateAsync(userToAdd, dto.Password);
-            if(await _roleManager.FindByIdAsync(dto.RoleName) == null)
-                await _roleManager.CreateAsync(new IdentityRole { Name = dto.RoleName});
-            await _userManager.AddToRoleAsync(userToAdd, dto.RoleName);
-            return response.MappingResponse(_mapper.Map<UserResponse>(userToAdd));
+            ResponseResultDto<UserResponse> response = new();
+            User userToAdd = mapper.Map<User>(dto);
+            userToAdd.Password = sharedService.HashPassword(userToAdd,dto.Password);
+            await unitOfWork.userRepository.AddAsync(userToAdd);
+            await unitOfWork.SaveAsync();
+            return response.MappingResponse(mapper.Map<UserResponse>(userToAdd));
         }
         //public async Task<ResponseResultDto<UserResponse>> GetPagedAsync(string id)
         //{
@@ -47,31 +36,31 @@ namespace Wazefa.Services.UserServices
         //}
         public async Task<ResponseResultDto<UserResponse>> GetByIdAsync(string id)
         {
-            var response = new ResponseResultDto<UserResponse>();
-            User? user = await _unitOfWork.userRepository.GetByIdAsync(id);
+            ResponseResultDto<UserResponse> response = new();
+            User? user = await unitOfWork.userRepository.GetByIdAsync(id);
             if (user == null)
                 return response.MappingResponse();
-            return response.MappingResponse(_mapper.Map<UserResponse>(user));
+            return response.MappingResponse(mapper.Map<UserResponse>(user));
         }
         public async Task<ResponseResultDto<UserResponse>> UpdateAsync(UpdateUserRequest dto)
         {
-            var response = new ResponseResultDto<UserResponse>();
-            User? user = await _userManager.FindByIdAsync(dto.Id);
+            ResponseResultDto<UserResponse> response = new();
+            User? user = await unitOfWork.userRepository.GetByIdAsync(dto.Id);
             if (user == null)
                 return response.MappingResponse();
-            _mapper.Map(dto, user);
+            mapper.Map(dto, user);
             user.ModificationDate = DateTime.UtcNow;
-            IdentityResult updatedUser = await _userManager.UpdateAsync(user);
-            return response.MappingResponse(_mapper.Map<UserResponse>(user));
+            User updatedUser = unitOfWork.userRepository.Update(user);
+            return response.MappingResponse(mapper.Map<UserResponse>(updatedUser));
         }
         public async Task<ResponseResultDto<bool>> DeleteAsync(string id)
         {
-            var response = new ResponseResultDto<bool>();
-            User? user = await _unitOfWork.userRepository.GetByIdAsync(id);
+            ResponseResultDto<bool> response = new();
+            User? user = await unitOfWork.userRepository.GetByIdAsync(id);
             if (user == null)
                 return response.MappingResponse();
-            _unitOfWork.userRepository.Delete(user);
-            bool isDeleted = await _unitOfWork.SaveAsync() > 0 ? true : false;
+            unitOfWork.userRepository.Delete(user);
+            bool isDeleted = await unitOfWork.SaveAsync() > 0 ? true : false;
             return response.MappingResponse(isDeleted);
         }
     }

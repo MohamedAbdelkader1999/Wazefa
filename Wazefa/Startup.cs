@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using NLog;
 using LoggerService;
 using API.CustomExceptionMiddleware;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace API
 {
@@ -39,6 +40,7 @@ namespace API
             services.AddEndpointsApiExplorer();
             LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             services
+                .AddDatabase(Configuration)
                 .AddAutoMapperService()
                 .AddUnitOfWorkAndRepository()
                 .AddBusinessServices()
@@ -47,15 +49,6 @@ namespace API
                 ;
             services.AddExceptionHandler<GlobalExceptionHandler>();
             services.AddProblemDetails();
-            services.AddDbContext<WazefaContext>(options =>
-                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User,IdentityRole>(c =>
-            {
-                c.Password.RequireNonAlphanumeric = false;
-                c.Password.RequireUppercase = false;
-                c.Password.RequireDigit = false;
-                c.Password.RequireLowercase = false;
-            }).AddEntityFrameworkStores<WazefaContext>().AddApiEndpoints();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -101,14 +94,16 @@ namespace API
             };
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(jwt =>
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
             {
-                jwt.SaveToken = true;
-                jwt.TokenValidationParameters = tokenValidationParams;
-                
+                options.Events.OnRedirectToLogin = (context) =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
             });
             services.AddAuthorization();
             

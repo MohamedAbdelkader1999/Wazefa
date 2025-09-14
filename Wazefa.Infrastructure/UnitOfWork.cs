@@ -11,11 +11,13 @@ namespace Wazefa.Data
     {
         private readonly WazefaContext _wazefaContext = wazefaContext;
         readonly IRepository<User, string> _userRepository = new Repository<User, string>(wazefaContext);
+        readonly IRepository<UserRole, string> _userRoleRepository = new Repository<UserRole, string>(wazefaContext);
         readonly IRepository<RefreshToken, string> _refreshTokenRepository = new Repository<RefreshToken, string>(wazefaContext);
         readonly IRepository<Company, string> _companyRepository = new Repository<Company, string>(wazefaContext);
         readonly IRepository<Appointment, string> _appointmentRepository = new Repository<Appointment, string>(wazefaContext);
 
         IRepository<User, string> IUnitOfWork.userRepository => _userRepository;
+        IRepository<UserRole, string> IUnitOfWork.userRoleRepository => _userRoleRepository;
         IRepository<RefreshToken, string> IUnitOfWork.refreshTokenRepository => _refreshTokenRepository;
         IRepository<Company, string> IUnitOfWork.companyRepository => _companyRepository;
         IRepository<Appointment, string> IUnitOfWork.appointmentRepository => _appointmentRepository;
