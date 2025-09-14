@@ -38,8 +38,8 @@ namespace API.Controllers
             {
                 var claims = new List<Claim>
                     {
-                        new Claim(type: ClaimTypes.Name,value: result.model.Data.UserName),
-                        new Claim(type: ClaimTypes.NameIdentifier,value: result.userId)
+                        new (ClaimTypes.Name, result.model.Data.UserName),
+                        new (ClaimTypes.NameIdentifier, result.userId)
                     };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
